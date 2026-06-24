@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Football Daily</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #CC0000;
+      --red-bright: #FF1A1A;
+      --red-dark: #8B0000;
+      --black: #0A0A0A;
+      --black-card: #141414;
+      --black-border: #222222;
+      --white: #F5F5F5;
+      --gray: #999999;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--black);
+      border-bottom: 3px solid var(--red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--red-bright); }
+    nav { display: flex; gap: 1.5rem; }
+    nav a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--red-bright); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--red-dark) 0%, var(--black) 60%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '⚽';
+      position: absolute;
+      font-size: 18rem;
+      opacity: 0.04;
+      top: -3rem;
+      right: -3rem;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 10vw, 6rem);
+      letter-spacing: 4px;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      color: var(--red-bright);
+      font-style: normal;
+    }
+    .hero p {
+      color: var(--gray);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      font-size: 1rem;
+    }
+    .hero-btn {
+      background: var(--red);
+      color: var(--white);
+      padding: 0.8rem 2rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .hero-btn:hover { background: var(--red-bright); }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--red);
+      padding: 0.5rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 25s linear infinite;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      border-left: 4px solid var(--red);
+      padding-left: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    .featured-image {
+      background: linear-gradient(135deg, var(--red-dark), #1a0000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      min-height: 280px;
+    }
+    .featured-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .article-cat {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.6rem;
+    }
+    .featured-content h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+    }
+    .featured-content p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .read-more {
+      color: var(--red-bright);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .read-more:hover { color: var(--white); }
+
+    /* ── ARTICLE GRID ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .article-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .article-card:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+    .card-image {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+    .card-image.img1 { background: linear-gradient(135deg, #1a0000, #330000); }
+    .card-image.img2 { background: linear-gradient(135deg, #0a0a1a, #001133); }
+    .card-image.img3 { background: linear-gradient(135deg, #0a1a00, #003300); }
+    .card-image.img4 { background: linear-gradient(135deg, #1a1a00, #333300); }
+    .card-image.img5 { background: linear-gradient(135deg, #1a000a, #330011); }
+    .card-body { padding: 1.2rem; }
+    .card-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .card-body p {
+      color: var(--gray);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--gray);
+      border-top: 1px solid var(--black-border);
+      padding-top: 0.8rem;
+    }
+    .card-meta .cat { color: var(--red-bright); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--black-border);
+      border: 1px solid var(--black-border);
+      margin-bottom: 3rem;
+    }
+    .stat-item {
+      background: var(--black-card);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--red-bright);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: linear-gradient(135deg, var(--red-dark), #1a0000);
+      border: 1px solid var(--red-dark);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .newsletter h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+    .newsletter p { color: var(--gray); margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1;
+      background: var(--black);
+      border: 1px solid var(--black-border);
+      border-right: none;
+      color: var(--white);
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      outline: none;
+      font-family: var(--font-body);
+    }
+    .newsletter-form button {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--red-bright); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black-card);
+      border-top: 3px solid var(--red);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--red-bright); }
+    footer p { color: var(--gray); font-size: 0.8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured-image { min-height: 180px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      nav { display: none; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { border-right: 1px solid var(--black-border); border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Football<span>Daily</span></a>
+    <nav>
+      <a href="#latest">Latest</a>
+      <a href="#world-cup">World Cup</a>
+      <a href="#transfers">Transfers</a>
+      <a href="#analysis">Analysis</a>
+    </nav>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    ⚽ Welcome to Football Daily — Your #1 Source for Football News &nbsp;|&nbsp; World Cup 2026 Coverage &nbsp;|&nbsp; Transfer Rumors &nbsp;|&nbsp; Match Previews &nbsp;|&nbsp; Player Analysis &nbsp;|&nbsp; Premier League &nbsp;|&nbsp; La Liga &nbsp;|&nbsp; Serie A &nbsp;|&nbsp; Champions League &nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🔴 Live Coverage</div>
+  <h1>The World's <em>Football</em> News</h1>
+  <p>Match previews, transfer rumors, player analysis, and everything football — updated daily.</p>
+  <a href="#latest" class="hero-btn">Read Today's Stories →</a>
+</section>
+
+<!-- STATS -->
+<div class="container">
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">32</span>
+      <span class="stat-label">World Cup Teams</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Top Leagues</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">100+</span>
+      <span class="stat-label">Articles</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">24/7</span>
+      <span class="stat-label">Coverage</span>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="section-label" id="latest">Featured Story</div>
+  <div class="featured">
+    <div class="featured-image">🏆</div>
+    <div class="featured-content">
+      <div class="article-cat">World Cup 2026</div>
+      <h2>World Cup 2026: Everything You Need to Know About the Biggest Tournament in History</h2>
+      <p>The 2026 FIFA World Cup is set to be the largest in history, hosted across the USA, Canada, and Mexico with 48 teams competing for the ultimate prize in football.</p>
+      <a href="#" class="read-more">Read Full Story →</a>
+    </div>
+  </div>
+
+  <!-- ARTICLE GRID -->
+  <div class="section-label">Latest Articles</div>
+  <div class="articles-grid">
+
+    <div class="article-card">
+      <div class="card-image img1">👑</div>
+      <div class="card-body">
+        <div class="article-cat">Premier League</div>
+        <h3>Premier League 2025/26: Title Race Predictions and Key Battles</h3>
+        <p>As the new season kicks off, we break down every contender, their summer signings, and who has what it takes to lift the trophy.</p>
+        <div class="card-meta">
+          <span class="cat">Premier League</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-image img2">⚡</div>
+      <div class="card-body">
+        <div class="article-cat">Transfers</div>
+        <h3>Summer Transfer Window 2026: Biggest Deals and Rumours So Far</h3>
+        <p>From blockbuster moves to shock departures, here are all the major transfers shaking up European football this summer.</p>
+        <div class="card-meta">
+          <span class="cat">Transfers</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-image img3">🌟</div>
+      <div class="card-body">
+        <div class="article-cat">Analysis</div>
+        <h3>Mbappe vs Vinicius Jr: Who is the Best Player in the World Right Now?</h3>
+        <p>We compare stats, trophies, influence and big-game performance to settle the debate on football's two biggest stars.</p>
+        <div class="card-meta">
+          <span class="cat">Analysis</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-image img4">🔥</div>
+      <div class="card-body">
+        <div class="article-cat">Champions League</div>
+        <h3>Champions League 2026/27 Preview: Who Are the Favourites to Win It All?</h3>
+        <p>With the group stage draw approaching, we look at which clubs have the squad depth and quality to go all the way in Europe.</p>
+        <div class="card-meta">
+          <span class="cat">Champions League</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-image img5">🎯</div>
+      <div class="card-body">
+        <div class="article-cat">World Cup</div>
+        <h3>Top 10 World Cup Goals of All Time: A Journey Through Football History</h3>
+        <p>From Maradona's solo wonder to Goetze's extra-time winner — we rank the most breathtaking goals ever scored at a World Cup.</p>
+        <div class="card-meta">
+          <span class="cat">World Cup</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="card-image img1">🛡️</div>
+      <div class="card-body">
+        <div class="article-cat">La Liga</div>
+        <h3>La Liga's New Era: Can Anyone Stop Real Madrid's Dominance?</h3>
+        <p>Barcelona are rebuilding, Atletico are dangerous, but Real Madrid remain the benchmark. We assess the title race ahead of the new season.</p>
+        <div class="card-meta">
+          <span class="cat">La Liga</span>
+          <span>June 2026</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <h2>Never Miss a Story</h2>
+    <p>Get the latest football news delivered straight to your inbox every day.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Enter your email address..." />
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Football<span>Daily</span></div>
+  <p>Your #1 source for football news, analysis, and World Cup coverage.</p>
+  <br/>
+  <p style="font-size:0.72rem; color:#555;">© 2026 Football Daily. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
