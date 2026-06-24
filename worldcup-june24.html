@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Cup 2026 – June 24 Match Day | Football Daily</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #CC0000; --red-bright: #FF1A1A; --red-dark: #8B0000;
+      --black: #0A0A0A; --black-card: #141414; --black-border: #222222;
+      --white: #F5F5F5; --gray: #999999;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+    }
+    body { background: var(--black); color: var(--white); font-family: var(--font-body); line-height: 1.7; }
+
+    header {
+      background: var(--black); border-bottom: 3px solid var(--red);
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+    .logo span { color: var(--red-bright); }
+
+    .article-wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+    .back-link {
+      color: var(--red-bright); text-decoration: none; font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      display: inline-block; margin-bottom: 1.5rem;
+    }
+
+    .article-cat {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--red-bright); margin-bottom: 0.8rem;
+    }
+    h1 {
+      font-family: var(--font-serif); font-size: clamp(1.8rem, 5vw, 2.8rem);
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .article-meta {
+      color: var(--gray); font-size: 0.82rem; margin-bottom: 2rem;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--black-border);
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--red-dark), #1a0000);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; height: 200px; margin-bottom: 2rem;
+      border: 1px solid var(--black-border);
+    }
+
+    .article-body p { color: #ccc; margin-bottom: 1.2rem; font-size: 1rem; }
+    .article-body h2 {
+      font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px;
+      color: var(--white); border-left: 4px solid var(--red);
+      padding-left: 0.8rem; margin: 2rem 0 1rem;
+    }
+
+    /* MATCH CARDS */
+    .match-card {
+      background: var(--black-card); border: 1px solid var(--black-border);
+      padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+    }
+    .match-card.live { border-left: 4px solid var(--red-bright); }
+    .match-card.finished { border-left: 4px solid #444; }
+    .match-card.upcoming { border-left: 4px solid #333; }
+
+    .teams { display: flex; align-items: center; gap: 0.8rem; font-weight: 700; font-size: 1rem; }
+    .vs { color: var(--gray); font-size: 0.8rem; }
+    .score {
+      font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px;
+      color: var(--red-bright); min-width: 80px; text-align: center;
+    }
+    .match-status {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 0.2rem 0.6rem;
+    }
+    .status-final { background: #333; color: var(--gray); }
+    .status-upcoming { background: var(--red-dark); color: var(--white); }
+    .match-info { color: var(--gray); font-size: 0.78rem; }
+
+    /* YESTERDAY RESULTS */
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .result-card {
+      background: var(--black-card); border: 1px solid var(--black-border);
+      padding: 1rem; text-align: center;
+    }
+    .result-teams { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .result-score {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--red-bright); letter-spacing: 2px;
+    }
+    .result-label { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* PREDICTION BOX */
+    .prediction-box {
+      background: linear-gradient(135deg, var(--red-dark), #1a0000);
+      border: 1px solid var(--red-dark); padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .prediction-box h3 {
+      font-family: var(--font-display); font-size: 1.3rem;
+      letter-spacing: 2px; margin-bottom: 0.8rem; color: var(--white);
+    }
+    .prediction-box p { color: #ddd; font-size: 0.9rem; margin-bottom: 0; }
+    .prob-bar { display: flex; gap: 0.3rem; margin-top: 0.8rem; height: 8px; border-radius: 4px; overflow: hidden; }
+    .prob-home { background: var(--red-bright); }
+    .prob-draw { background: #666; }
+    .prob-away { background: #333; flex: 1; }
+    .prob-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--gray); margin-top: 0.4rem; }
+
+    footer {
+      background: var(--black-card); border-top: 3px solid var(--red);
+      padding: 2rem 1.5rem; text-align: center; margin-top: 3rem;
+    }
+    .footer-logo { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .footer-logo span { color: var(--red-bright); }
+    footer p { color: var(--gray); font-size: 0.8rem; }
+
+    @media(max-width: 600px) {
+      .match-card { flex-direction: column; align-items: flex-start; }
+      .score { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Football<span>Daily</span></a>
+  </div>
+</header>
+
+<div class="article-wrap">
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <div class="article-cat">🏆 World Cup 2026 — Match Day Update</div>
+  <h1>World Cup 2026: All of Today's Matches, Results & Predictions — June 24</h1>
+  <div class="article-meta">By Football Daily | Wednesday, June 24, 2026 | World Cup 2026</div>
+
+  <div class="hero-banner">🌍⚽🏆</div>
+
+  <div class="article-body">
+
+    <p>It's a massive day at the 2026 FIFA World Cup as the final round of group stage matches gets underway across the USA, Canada and Mexico. Six matches are on the schedule today, with several nations fighting for their place in the knockout rounds. Here is everything you need to know.</p>
+
+    <!-- TODAY'S MATCHES -->
+    <h2>Today's Matches</h2>
+    <p>Six games are scheduled today across three time slots — every result matters as teams fight for a place in the Round of 32.</p>
+
+    <p><strong>3:00 PM ET — Group B</strong></p>
+    <div class="match-card upcoming">
+      <div class="teams">🇨🇭 Switzerland <span class="vs">vs</span> Canada 🇨🇦</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">BC Place, Vancouver</div>
+    </div>
+    <div class="match-card upcoming">
+      <div class="teams">🇧🇦 Bosnia & Herz. <span class="vs">vs</span> Qatar 🇶🇦</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">Lumen Field, Seattle</div>
+    </div>
+
+    <p><strong>6:00 PM ET — Group C</strong></p>
+    <div class="match-card upcoming">
+      <div class="teams">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland <span class="vs">vs</span> Brazil 🇧🇷</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">Hard Rock Stadium, Miami</div>
+    </div>
+    <div class="match-card upcoming">
+      <div class="teams">🇲🇦 Morocco <span class="vs">vs</span> Haiti 🇭🇹</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">Mercedes-Benz Stadium, Atlanta</div>
+    </div>
+
+    <p><strong>9:00 PM ET — Group A</strong></p>
+    <div class="match-card upcoming">
+      <div class="teams">🇨🇿 Czechia <span class="vs">vs</span> Mexico 🇲🇽</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">Estadio Azteca, Mexico City</div>
+    </div>
+    <div class="match-card upcoming">
+      <div class="teams">🇿🇦 South Africa <span class="vs">vs</span> South Korea 🇰🇷</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Upcoming</span>
+      <div class="match-info">Estadio BBVA, Monterrey</div>
+    </div>
+
+    <!-- MATCH TO WATCH -->
+    <h2>🔥 Match to Watch: Scotland vs Brazil</h2>
+    <p>The biggest game of the day is without question Scotland vs Brazil at Hard Rock Stadium in Miami. Scotland have a historic chance to reach the knockout rounds of a World Cup for the very first time ever. Standing in their way? Five-time World Cup champions Brazil.</p>
+
+    <div class="prediction-box">
+      <h3>⚽ Match Prediction</h3>
+      <p>Brazil are heavy favourites but Scotland will make this very difficult. Expect a tense, low-scoring affair.</p>
+      <div class="prob-bar">
+        <div class="prob-away" style="width:8.8%; background:#555;"></div>
+        <div class="prob-draw" style="width:16.4%;"></div>
+        <div class="prob-home" style="width:74.8%;"></div>
+      </div>
+      <div class="prob-labels">
+        <span>Scotland 8.8%</span>
+        <span>Draw 16.4%</span>
+        <span>Brazil 74.8%</span>
+      </div>
+    </div>
+
+    <!-- YESTERDAY'S RESULTS -->
+    <h2>Yesterday's Results — June 23</h2>
+    <p>Here is how things played out in yesterday's group stage action:</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-teams">🇵🇹 Portugal vs Uzbekistan 🇺🇿</div>
+        <div class="result-score">5 — 0</div>
+        <div class="result-label">Ronaldo brace ⭐</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-teams">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England vs Ghana 🇬🇭</div>
+        <div class="result-score">0 — 0</div>
+        <div class="result-label">Goalless draw</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-teams">🇵🇦 Panama vs Croatia 🇭🇷</div>
+        <div class="result-score">0 — 1</div>
+        <div class="result-label">Modric 200th cap ⭐</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-teams">🇨🇴 Colombia vs Congo DR 🇨🇩</div>
+        <div class="result-score">1 — 0</div>
+        <div class="result-label">Muñoz goal</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-teams">🇫🇷 France vs Iraq 🇮🇶</div>
+        <div class="result-score">3 — 0</div>
+        <div class="result-label">Mbappé shines ⭐</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Final</div>
+        <div class="result-towns">🇳🇴 Norway vs Senegal 🇸🇳</div>
+        <div class="result-score">3 — 2</div>
+        <div class="result-label">Haaland fires Norway through ⭐</div>
+      </div>
+    </div>
+
+    <!-- STORY OF THE DAY -->
+    <h2>🌟 Story of the Day: Ronaldo Silences the Critics</h2>
+    <p>After a difficult first match against Congo DR, Cristiano Ronaldo reminded the world exactly why he is still playing at the highest level. The Portuguese captain scored twice in a dominant 5-0 victory over Uzbekistan, taking his World Cup goal tally to new heights and firing Portugal to the top of their group.</p>
+
+    <p>Nuno Mendes and Rafael Leão also found the net as Portugal put on a masterclass of attacking football. Ronaldo's performance has once again sparked debate — is the 41-year-old still the best player at this tournament?</p>
+
+    <!-- TOMORROW PREVIEW -->
+    <h2>👀 Coming Up Tomorrow — June 25</h2>
+    <p>Tomorrow brings more massive group stage action including:</p>
+    <div class="match-card upcoming">
+      <div class="teams">🇩🇪 Germany <span class="vs">vs</span> Ecuador 🇪🇨</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Tomorrow</span>
+    </div>
+    <div class="match-card upcoming">
+      <div class="teams">🇯🇵 Japan <span class="vs">vs</span> Sweden 🇸🇪</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Tomorrow</span>
+    </div>
+    <div class="match-card upcoming">
+      <div class="teams">🇳🇱 Netherlands <span class="vs">vs</span> Tunisia 🇹🇳</div>
+      <div class="score">- : -</div>
+      <span class="match-status status-upcoming">Tomorrow</span>
+    </div>
+
+    <p>Stay with <strong>Football Daily</strong> for live updates, results and analysis throughout the day. Bookmark this page and check back after every match! ⚽🔥</p>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Football<span>Daily</span></div>
+  <p>Your #1 source for football news, analysis and World Cup 2026 coverage.</p>
+</footer>
+
+</body>
+</html>
